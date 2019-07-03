@@ -1,0 +1,86 @@
+﻿<Window
+    x:Class="PracticeChinese.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PracticeChinese"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="600"
+    Height="400"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local:ColorConverter x:Key="ColorConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Margin="10"
+            Foreground="{DynamicResource PrimaryHueMidBrush}"
+            Style="{DynamicResource MaterialDesignTitleTextBlock}"
+            Text="Chinese character review" />
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="10"
+            Orientation="Horizontal">
+            <Button Click="AddNewChar_Click" Content="Add new character" />
+            <Button
+                Margin="10,0"
+                Click="Start_Click"
+                Content="Start" />
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style x:Key="Hatten">
+                        <Setter Property="TextElement.FontFamily" Value="Resources/#GSIN00H" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock
+                    FontFamily="NSimSun"
+                    FontSize="80"
+                    Foreground="{Binding CurrentChar.Level, Converter={StaticResource ColorConverter}}"
+                    Text="{Binding CurrentChar.UChar}" />
+                <TextBlock Text="{Binding CurrentChar.Definition}" Visibility="Collapsed" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Button
+                    x:Name="Button_A"
+                    Margin="10,5"
+                    Click="Button_Ans_Click"
+                    Content="{Binding Pinyin_1}" />
+                <Button
+                    x:Name="Button_B"
+                    Margin="10,5"
+                    Click="Button_Ans_Click"
+                    Content="{Binding Pinyin_2}" />
+
+                <Button
+                    x:Name="Button_C"
+                    Margin="10,5"
+                    Click="Button_Ans_Click"
+                    Content="{Binding Pinyin_3}" />
+
+                <Button
+                    x:Name="Button_D"
+                    Margin="10,5"
+                    Click="Button_Ans_Click"
+                    Content="{Binding Pinyin_4}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
